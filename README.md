@@ -8,6 +8,8 @@
 # Metin2-Events-Calendar-Test
 A calendar with events which is full customizable.
 
+https://www.youtube.com/watch?v=v5baZwSjp-o
+
 	  EVENTS_CALENDAR_DICT is just a configuration for <Python-Live-Test>.
 	  The struct of the dictionary need to get it like EVENTS_CALENDAR_DICT = calendar.GetEventsData() << Source Client.
     Parse the values from server to binary with Concrete Objects Layer.
