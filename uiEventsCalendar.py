@@ -141,11 +141,11 @@ EVENTS_CALENDAR_DICT = \
 	},
 };
 
-MONTH_MAX_NUM			= 12
-DAY_MAX_NUM				= 31
-WEEK_MONTH_MAX_NUM		= 4
-WEEK_DAY_MAX_NUM 		= 7
-DAYS_PER_YEAR_MAX_NUM 	= 365
+MONTH_MAX_NUM           = 12
+DAY_MAX_NUM             = 31
+WEEK_MONTH_MAX_NUM      = 4
+WEEK_DAY_MAX_NUM        = 7
+DAYS_PER_YEAR_MAX_NUM   = 365
 
 '''
 	A smart class based by mathematical operations.
@@ -155,25 +155,25 @@ DAYS_PER_YEAR_MAX_NUM 	= 365
 '''
 class Math(object):
 	# Text attributes (name for days of week & number day).
-	FONT_HEIGHT					= 15
-	LINE_HEIGHT					= 35
+	FONT_HEIGHT                 = 15
+	LINE_HEIGHT                 = 35
 
 	# Objects positions.
-	BASE_START_X				= 294
-	BASE_START_Y				= 62
-	BASE_DISTANCE_X				= 46
-	BASE_DISTANCE_Y				= 40
+	BASE_START_X                = 294
+	BASE_START_Y                = 62
+	BASE_DISTANCE_X             = 46
+	BASE_DISTANCE_Y             = 40
 
 	# Sequences generators.
 	SEQUENCE_MONTH_LIST			= range(1, MONTH_MAX_NUM + 1);
-	SEQUENCE_WEEK_DAY_LIST 		= range(WEEK_DAY_MAX_NUM);
+	SEQUENCE_WEEK_DAY_LIST		= range(WEEK_DAY_MAX_NUM);
 	SEQUENCE_DAY_LIST			= range(1, DAY_MAX_NUM + 1);
 	
 	# Range days for all months.
-	OFFSETS_MONTH_RANGE_TUPLE 	= (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+	OFFSETS_MONTH_RANGE_TUPLE   = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 	
 	# Range for week first, second, third, fourth + 1. 
-	OFFSETS_WEEK_RANGE_TUPLE 	= ([1, 8], [8, 15], [15, 22], [22, 29]);
+	OFFSETS_WEEK_RANGE_TUPLE    = ([1, 8], [8, 15], [15, 22], [22, 29]);
 	
 	# Translations Week days & Months.
 	NAMES_MONTH_TUPLE =  tuple(eval('localeInfo.CALENDAR_MONTH_{:d}'.format(item)) for item in SEQUENCE_MONTH_LIST);
@@ -189,27 +189,28 @@ class Math(object):
 	# Generate a list as comprehension with a range for each week.
 	def GetWeekRange():
 		return [range(*seek) for seek in Math.OFFSETS_WEEK_RANGE_TUPLE]
+		
+	@staticmethod
+	def GetLeapYear(year):
+		"""
+			03.27.2019:
+				A normal year has 365 days. 
+				A Leap Year has 366 days (the extra day is the 29th of February).
+				yes	Leap Years are any year that can be exactly divided by 4 (such as 2012, 2016, etc)
+				not	except if it can be exactly divided by 100, then it isn't (such as 2100, 2200, etc)
+				yes	except if it can be exactly divided by 400, then it is (such as 2000, 2400)
+				
+				Provides support for maintaining a list in sorted order without having to sort the list after each insertion.
+				Return True for leap years, False for non-leap years.
+			
+		"""
+		return year % 4 == 0 and (year % 100 <> 0 or year % 400 == 0)
 
 	@staticmethod
 	# Get maximum number of days for the specified month.
 	def GetRangeDaysMonth﻿(calendarMonth):
-		def GetBisectionYear(year):
-			"""
-				03.27.2019:
-					A normal year has 365 days. 
-					A Leap Year has 366 days (the extra day is the 29th of February).
-					yes	Leap Years are any year that can be exactly divided by 4 (such as 2012, 2016, etc)
-					not	except if it can be exactly divided by 100, then it isn't (such as 2100, 2200, etc)
-					yes	except if it can be exactly divided by 400, then it is (such as 2000, 2400)
-					
-					Provides support for maintaining a list in sorted order without having to sort the list after each insertion.
-					Return True for leap years, False for non-leap years.
-				
-			"""
-			return year % 4 == 0 and (year % 100 <> 0 or year % 400 == 0)
-
 		""" TODO-DONE: Fix the calendar range days-month if month is February and is a bisection year like 2016, 2020, 2024 ... """
-		return Math.OFFSETS_MONTH_RANGE_TUPLE[calendarMonth - 1] + (calendarMonth == 2 and GetBisectionYear(Math.GetCurrentYear()))
+		return Math.OFFSETS_MONTH_RANGE_TUPLE[calendarMonth - 1] + (calendarMonth == 2 and Math.GetLeapYear(Math.GetCurrentYear()))
 	
 	@staticmethod
 	# Get month name.
@@ -235,9 +236,14 @@ class Math(object):
 		for attr in Math.OFFSETS_MONTH_RANGE_TUPLE[:MONTH_MAX_NUM - 1]:
 			offsets.append(offsets[-1] + attr)	
 		offsets.append(Math.GetCurrentYear() - 318)
+		
+		# Todo-Done: Fix days per year if is a leap year 366, if not 365.
+		daysPerYear = DAYS_PER_YEAR_MAX_NUM
+		if Math.GetLeapYear(Math.GetCurrentYear()):
+			daysPerYear = DAYS_PER_YEAR_MAX_NUM + 1 
 
 		result_day_of_week = add(WEEK_MONTH_MAX_NUM, 1)
-		result_day_of_week += mul(add(Math.GetCurrentYear() - offsets[-1] - round, round), DAYS_PER_YEAR_MAX_NUM)
+		result_day_of_week += mul(add(Math.GetCurrentYear() - offsets[-1] - round, round), daysPerYear)
 		result_day_of_week += add(offsets[calendarMonth - 1], calendarDay)
 		return result_day_of_week % WEEK_DAY_MAX_NUM
 
