@@ -284,22 +284,23 @@ class EventsCalendarWindow(ui.ScriptWindow):
 
 					# TODO DONE: Convert start_time < split string list to int.
 					eventName, eventResult = eventData.get('name'), list(map(int, eventData.get('start_time').split(':')))
-					eventStartime, eventEndTime = Math.GetDurationTime((eventResult[-2], eventResult[-1]), int(eventData.get('end_time')))
 					if not len(eventResult):
 						continue
+
+					eventStartime, eventEndTime = Math.GetDurationTime((eventResult[-2], eventResult[-1]), int(eventData.get('end_time')))
 					
 					# TODO DONE: Insert the event for all days in each month. | 21:50
 					# << 336-372 (1 * 31 * 12)
 					if eventPeriod == 'DAILY':
 						for calendarMonth in Math.SEQUENCE_MONTH_LIST:
-							for calendarDay, calendarObject in enumerate(self.eventManagerDict.get(calendarMonth, [])[:self.DAY_INSERT_MAX_NUM]):
+							for calendarDay, calendarObject in enumerate(self.eventManagerDict[calendarMonth][:self.DAY_INSERT_MAX_NUM]):
 								calendarObject.InsertEvent(eventPeriod, eventType, eventName, eventStartime, eventEndTime, calendarMonth, calendarDay)
 
 					# TODO DONE: Insert the event by a specific day of week for each month. | 1:15:00
 					# << (1 * 4 * 12)
 					elif eventPeriod == 'WEEKLY':
 						for calendarMonth in Math.SEQUENCE_MONTH_LIST:
-							for calendarDay, calendarObject in enumerate(self.eventManagerDict.get(calendarMonth, [])[:self.DAY_INSERT_MAX_NUM]):
+							for calendarDay, calendarObject in enumerate(self.eventManagerDict[calendarMonth][:self.DAY_INSERT_MAX_NUM]):
 								if Math.GetUniqueWeekDay(calendarMonth, calendarDay) == eventResult[-3]:
 									calendarObject.InsertEvent(eventPeriod, eventType, eventName, eventStartime, eventEndTime, calendarMonth, calendarDay)
 
@@ -307,7 +308,7 @@ class EventsCalendarWindow(ui.ScriptWindow):
 					elif eventPeriod == 'MONTHLY':
 						for calendarMonth in Math.SEQUENCE_MONTH_LIST:
 							if calendarMonth == eventResult[-4]:
-								for calendarDay, calendarObject in enumerate(self.eventManagerDict.get(calendarMonth, [])[:self.DAY_INSERT_MAX_NUM]):
+								for calendarDay, calendarObject in enumerate(self.eventManagerDict[calendarMonth][:self.DAY_INSERT_MAX_NUM]):
 									 if calendarDay + 1 == eventResult[-3]:
 										calendarObject.InsertEvent(eventPeriod, eventType, eventName, eventStartime, eventEndTime, calendarMonth, calendarDay)
 
