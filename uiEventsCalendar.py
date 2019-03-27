@@ -70,6 +70,8 @@ ________________________________________________________________________________
 	The concept isn't 100% finished in r0.1.2, contact author for further informations.
 '''
 
+# calendar.GetEventsData() < Get from client-server.
+# This dictionary is just a example for live-test.
 EVENTS_CALENDAR_DICT = \
 {
 	### Flag Event << Using server event flags like: << [fishing_event, fotball_drop, drop_moon, choco_drop, herbs_drop, ...] >>
