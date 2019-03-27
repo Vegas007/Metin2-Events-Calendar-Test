@@ -192,8 +192,24 @@ class Math(object):
 
 	@staticmethod
 	# Get maximum number of days for the specified month.
-	def GetRangeDaysMonth(calendarMonth):
-		return Math.OFFSETS_MONTH_RANGE_TUPLE[calendarMonth - 1]
+	def GetRangeDaysMonth﻿(calendarMonth):
+		def GetBisectionYear(year):
+			"""
+				03.27.2019:
+					A normal year has 365 days. 
+					A Leap Year has 366 days (the extra day is the 29th of February).
+					yes	Leap Years are any year that can be exactly divided by 4 (such as 2012, 2016, etc)
+					not	except if it can be exactly divided by 100, then it isn't (such as 2100, 2200, etc)
+					yes	except if it can be exactly divided by 400, then it is (such as 2000, 2400)
+					
+					Provides support for maintaining a list in sorted order without having to sort the list after each insertion.
+					Return True for leap years, False for non-leap years.
+				
+			"""
+			return year % 4 == 0 and (year % 100 <> 0 or year % 400 == 0)
+
+		""" TODO-DONE: Fix the calendar range days-month if month is February and is a bisection year like 2016, 2020, 2024 ... """
+		return Math.OFFSETS_MONTH_RANGE_TUPLE[calendarMonth - 1] + (calendarMonth == 2 and GetBisectionYear(Math.GetCurrentYear()))
 	
 	@staticmethod
 	# Get month name.
