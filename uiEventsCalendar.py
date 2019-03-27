@@ -75,70 +75,21 @@ EVENTS_CALENDAR_DICT = \
 	### Flag Event << Using server event flags like: << [fishing_event, fotball_drop, drop_moon, choco_drop, herbs_drop, ...] >>
 	'FLAG': \
 	{
-		'MONTHLY': [
-			{'name': 'Fishing Drop Event', 'start_time': '3:26:02:00', 'end_time': '1'},
-			{'name': 'Fotball Drop Event', 'start_time': '3:26:16:00', 'end_time': '2'},
-			{'name': 'Herbs Drop Event', 'start_time': '3:26:16:00', 'end_time': '3'},
-			{'name': 'Choco Drop Event', 'start_time': '3:26:03:00', 'end_time': '1'}
-		],
-		
 		'WEEKLY': [{'name': 'Moon Drop Event', 'start_time': '2:14:00', 'end_time': '4'}, ],
 	},
 	
 	### Ox Event
-	'OX': {
-		'MONTHLY': [
-			{'name': 'OX Event', 'start_time': '3:26:04:00', 'end_time': '1'},
-			{'name': 'OX Event', 'start_time': '5:22:05:00', 'end_time': '1'},
-			{'name': 'OX Event', 'start_time': '1:12:05:00', 'end_time': '1'},
-			{'name': 'OX Event', 'start_time': '8:12:05:00', 'end_time': '1'},
-		],
-		
-		'WEEKLY': [{'name': 'OX Event', 'start_time': '2:16:00', 'end_time': '1'}, ],
-	},
-	
+	'OX': {},
 	### Tournament Event
-	'PVP': {
-		'MONTHLY': [
-			{'name': 'Tournament PvP Event', 'start_time': '3:26:05:00', 'end_time': '1'},
-			{'name': 'Tournament PvP Event', 'start_time': '5:26:05:00', 'end_time': '1'},
-		],
-
-		'WEEKLY': [{'name': 'Tournament PvP Event', 'start_time': '2:17:00', 'end_time': '1'}, ],
-	},
-	
+	'PVP': {},
 	### Guild Event
-	'GUILD': {
-		'MONTHLY': [
-			{'name': 'Guild Event', 'start_time': '3:26:06:00', 'end_time': '1'},
-		],
-	},
-	
+	'GUILD': {},
 	### Monarch Event
-	'MONARCH': {
-		'MONTHLY': [
-			{'name': 'Monarch Event', 'start_time': '3:26:09:00', 'end_time': '1'},
-			{'name': 'Monarch Event', 'start_time': '7:11:09:00', 'end_time': '1'},
-		],
-	},
-	
+	'MONARCH': {},
 	### Gold Event
-	'GOLD_EVENT': {
-		'MONTHLY': [
-			{'name': 'Gold Event', 'start_time': '3:26:12:00', 'end_time': '1'},
-			{'name': 'Gold Event', 'start_time': '3:15:05:00', 'end_time': '1'},
-			{'name': 'Gold Event', 'start_time': '12:19:12:00', 'end_time': '1'},
-			{'name': 'Gold Event', 'start_time': '7:11:12:00', 'end_time': '1'},
-		],
-	},
-	
+	'GOLD_EVENT': {},
 	### Empire War Event
-	'EMPIRE_WAR': {
-		'MONTHLY': [
-			{'name': 'Empire War Event', 'start_time': '3:26:13:00', 'end_time': '1'},
-			{'name': 'Empire War Event', 'start_time': '2:15:05:00', 'end_time': '1'},
-		],
-	},
+	'EMPIRE_WAR': {},
 };
 
 MONTH_MAX_NUM           = 12
