@@ -6,7 +6,8 @@
                           |______\_/ \___|_| |_|\__|___/  \_____\__,_|_|\___|_| |_|\__,_|\__,_|_| 
 
 # Metin2-Events-Calendar-Test
-A calendar with events which is full customizable.
+A python module for calendar with events which is full customizable.
+PS: The module isn't contain all resources, no support for installation.
 
 https://www.youtube.com/watch?v=v5baZwSjp-o
 
